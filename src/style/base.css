@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: theme(fontFamily.manrope);
+  font-weight: 400;
+}
+
+h1 {
+  font-size: theme(fontSize.6xl);
+  line-height: 65px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+h2 {
+  font-size: theme(fontSize.5xl);
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+h3 {
+  font-size: theme(fontSize.3xl);
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+
+h4 {
+  font-size: theme(fontSize.3xl);
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}

@@ -1,0 +1,80 @@
+---
+import { dateFormat } from '@/utils/helper'
+import { Image } from 'astro:assets'
+import { twMerge } from 'tailwind-merge'
+
+interface Props extends IPost {
+  cardContainerClass?: string
+  className?: string
+}
+
+const {
+  title,
+  featured_media,
+  categories,
+  date,
+  link,
+  slug,
+  className,
+  cardContainerClass
+}: Props = Astro.props
+
+const res = await fetch(
+  `https://wp.zivjetizdravo.com/wp-json/wp/v2/media/${featured_media}`
+)
+
+const featuredImage = await res.json()
+
+const postCategories: ICategory[] = await Promise.all(
+  categories.map(async category => {
+    const res = await fetch(
+      `https://wp.zivjetizdravo.com/wp-json/wp/v2/categories/${category}`
+    )
+
+    const data = await res.json()
+
+    return data
+  })
+)
+---
+
+<div class="flex flex-col gap-5">
+  <a href={`/${slug}`}>
+    <div class="h-60 overflow-hidden rounded-md 2xl:h-72">
+      <Image
+        width={700}
+        height={300}
+        src={featuredImage.source_url}
+        alt={title.rendered}
+        decoding="async"
+        loading="lazy"
+        format="webp"
+        class="h-full w-full object-cover object-center"
+      />
+    </div>
+  </a>
+
+  <div class="">
+    <div class="flex items-center">
+      <div class="flex">
+        {
+          postCategories.map(category => (
+            <a
+              href={'/category/' + category.slug}
+              class={twMerge(
+                'mr-3 rounded-md bg-light-gray px-3 py-1 text-sm uppercase text-dark-gray duration-300 hover:bg-black hover:text-white',
+                className
+              )}
+            >
+              {category.name}
+            </a>
+          ))
+        }
+      </div>
+      <p class="text-sm text-dark-gray">{dateFormat(date)}</p>
+    </div>
+    <a href={link}>
+      <h2 class="mt-6 text-2xl">{title.rendered}</h2>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+---
+export const prerender = true
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import CategoriesAside from '../../components/CategoriesAside.astro'
+
+export interface ICategoryList extends ICategory {
+  childCategories?: ICategory[]
+}
+
+export async function getStaticPaths() {
+  const res = await fetch(
+    'https://wp.zivjetizdravo.com/wp-json/wp/v2/categories?per_page=20'
+  )
+
+  const categories: ICategory[] = await res.json()
+
+  const mainCategories: ICategoryList[] = categories.filter(category => {
+    const childCategories = categories.filter(
+      childCategory =>
+        childCategory.parent !== 0 && childCategory.parent === category.id
+    )
+
+    if (category.parent === 0 && category.id !== 1)
+      return { ...category, childCategories }
+  })
+
+  const paths = categories.map(category => {
+    return {
+      params: {
+        slug: category.slug
+      },
+      props: { categories: mainCategories }
+    }
+  })
+
+  return paths
+}
+
+const { slug } = Astro.params
+const { categories } = Astro.props
+
+const curCategoryRes = await fetch(
+  `https://wp.zivjetizdravo.com/wp-json/wp/v2/categories?slug=${slug}`
+)
+const curCategory: ICategory[] = await curCategoryRes.json()
+
+const category = curCategory[0]
+---
+
+<BaseLayout title="">
+  <div class="grid grid-cols-[1fr_20rem]">
+    <div>{category.name}</div>
+
+    <aside class="flex flex-col">
+      <CategoriesAside categories={categories} urlSlug={slug} />
+    </aside>
+  </div>
+</BaseLayout>

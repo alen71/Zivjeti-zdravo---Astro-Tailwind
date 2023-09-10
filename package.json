@@ -1,0 +1,31 @@
+{
+  "name": "zivjeti-zdravo",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^6.0.0",
+    "@astrojs/preact": "^3.0.0",
+    "@fontsource-variable/manrope": "^5.0.12",
+    "@nanostores/preact": "^0.5.0",
+    "astro": "^3.0.8",
+    "nanostores": "^0.9.3",
+    "preact": "^10.17.1",
+    "sharp": "^0.32.5"
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "^5.0.0",
+    "clsx": "^2.0.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-astro": "^0.12.0",
+    "prettier-plugin-tailwindcss": "^0.5.4",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss": "^3.0.24"
+  }
+}

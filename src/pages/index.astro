@@ -1,0 +1,59 @@
+---
+import Card from '@/components/Card.astro'
+import LatestCard from '@/components/CardLatest.astro'
+import MainBtn from '@/components/MainBtn.astro'
+import Layout from '@/layouts/BaseLayout.astro'
+
+const latestPostsRes = await fetch(
+  'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?per_page=3'
+)
+const latestPosts: IPost[] = await latestPostsRes.json()
+
+const latestPostsClasses = [
+  'col-start-1 col-end-2 row-start-1 row-end-3',
+  'col-start-2 col-end-3 row-start-1 row-end-2',
+  'col-start-2 col-end-3 row-start-2 row-end-3'
+]
+
+const postsRes = await fetch(
+  'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?offset=0&per_page=9'
+)
+const posts: IPost[] = await postsRes.json()
+---
+
+<Layout title="Živjeti zdravo">
+  <h1 class="text-center uppercase">
+    Prirodni cjeloviti <br /> biljni recepti
+  </h1>
+
+  <p class="mx-auto mt-8 max-w-4xl px-6">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+
+  <div class="mt-24 grid max-h-[45rem] grid-cols-[60fr_40fr] grid-rows-2 gap-8">
+    {
+      latestPosts.map((post, i) => (
+        <LatestCard
+          {...post}
+          cardContainerClass={latestPostsClasses[i]}
+          {...(i === 0 && { headingClass: 'text-4xl' })}
+        />
+      ))
+    }
+  </div>
+
+  <div class="my-12 h-1 w-full bg-light-gray"></div>
+
+  <div class="grid max-h-[45rem] grid-cols-3 gap-8">
+    {posts.map((post, i) => <Card {...post} />)}
+  </div>
+
+  <div class="mx-auto mt-24 w-fit">
+    <MainBtn text="Pogledaj više" href="#" />
+  </div>
+</Layout>

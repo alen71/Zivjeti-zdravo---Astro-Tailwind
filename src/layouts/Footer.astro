@@ -1,0 +1,65 @@
+---
+import Logo from '@/components/Logo.astro'
+
+const footerSocial = [
+  {
+    text: 'facebook',
+    href: '#',
+  },
+  {
+    text: 'instagram',
+    href: '#',
+  },
+  {
+    text: 'twitter',
+    href: '#',
+  },
+]
+
+const footerNav = [
+  {
+    text: 'facebook',
+    href: '#',
+  },
+  {
+    text: 'instagram',
+    href: '#',
+  },
+  {
+    text: 'twitter',
+    href: '#',
+  },
+]
+---
+
+<footer>
+  <div class="container">
+    <div
+      class="py-14 grid grid-cols-3 justify-center items-center relative font-semibold"
+    >
+      <div class="absolute w-full h-1 left-0 top-0 bg-light-gray"></div>
+
+      <Logo />
+
+      <ul class="list-none text-center">
+        {
+          footerSocial.map(({ text, href }) => (
+            <li>
+              <a href={href}>{text}</a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <ul class="list-none text-center">
+        {
+          footerNav.map(({ text, href }) => (
+            <li>
+              <a href={href}>{text}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</footer>
