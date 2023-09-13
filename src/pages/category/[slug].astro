@@ -2,6 +2,8 @@
 export const prerender = true
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import CategoriesAside from '../../components/CategoriesAside.astro'
+import Card from '@/components/Card.astro'
+import type { Code } from 'astro:components'
 
 export interface ICategoryList extends ICategory {
   childCategories?: ICategory[]
@@ -45,11 +47,20 @@ const curCategoryRes = await fetch(
 const curCategory: ICategory[] = await curCategoryRes.json()
 
 const category = curCategory[0]
+
+console.log(category.id)
+
+const postsRes = await fetch(
+  `https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?categories=${category.id}`
+)
+const posts: IPost[] = await postsRes.json()
 ---
 
-<BaseLayout title="">
-  <div class="grid grid-cols-[1fr_20rem]">
-    <div>{category.name}</div>
+<BaseLayout>
+  <div class="grid grid-cols-[1fr_20rem] gap-24">
+    <div class="flex flex-col gap-20">
+      {posts.map(post => <Card {...post} imgContainerClass="h-[30rem]" />)}
+    </div>
 
     <aside class="flex flex-col">
       <CategoriesAside categories={categories} urlSlug={slug} />

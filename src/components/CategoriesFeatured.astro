@@ -1,0 +1,48 @@
+---
+import { Image } from 'astro:assets'
+import CategoryTag from './CategoryTag.astro'
+import { slide } from 'astro:transitions'
+
+interface Props extends IPost {}
+
+const { featured_media, categories, title }: Props = Astro.props
+
+const res = await fetch(
+  `https://wp.zivjetizdravo.com/wp-json/wp/v2/media/${featured_media}`
+)
+
+const featuredImage = await res.json()
+
+const postCategories: ICategory[] = await Promise.all(
+  categories.map(async category => {
+    const res = await fetch(
+      `https://wp.zivjetizdravo.com/wp-json/wp/v2/categories/${category}`
+    )
+
+    const data = await res.json()
+
+    return data
+  })
+)
+---
+
+<a href="#" class="">
+  <div class="flex flex-row items-center gap-5">
+    <div class="relative h-[6.25rem] w-[6.25rem] overflow-hidden rounded-full">
+      <Image
+        width={100}
+        height={100}
+        src={featuredImage.source_url}
+        alt={featuredImage.alt_text}
+        class="h-full w-full object-cover"
+      />
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <div class="flex">
+        {postCategories.map(category => <CategoryTag category={category} />)}
+      </div>
+      <span class="font-semibold">{title.rendered}</span>
+    </div>
+  </div>
+</a>

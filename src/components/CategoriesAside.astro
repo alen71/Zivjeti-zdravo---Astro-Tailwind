@@ -1,34 +1,61 @@
 ---
 import type { ICategoryList } from '@/pages/category/[slug].astro'
+
 import clsx from 'clsx'
+import CategoriesFeatured from './CategoriesFeatured.astro'
+import { slide } from 'astro:transitions'
 
 type Props = {
   categories: ICategoryList[]
   urlSlug: string
 }
 
+const latestPostsRes = await fetch(
+  'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?per_page=3'
+)
+const latestPosts: IPost[] = await latestPostsRes.json()
+
 const { categories, urlSlug }: Props = Astro.props
 ---
 
-<div class="flex flex-col">
-  {
-    categories.map(({ name, slug }) => (
-      <a
-        href={'/category/' + slug}
-        class="group flex items-center gap-3 text-2xl font-semibold"
-      >
-        <div class="grid h-5 w-5 place-items-center overflow-hidden rounded-full border-1 border-light-gray">
-          <div
-            class={clsx(
-              'h-5 w-5 scale-0 rounded-full bg-black duration-300 group-hover:scale-100',
-              {
-                'scale-100': urlSlug === slug
-              }
-            )}
+<div class="flex flex-col gap-20">
+  <div>
+    <p class="pb-6">Kategorije</p>
+    <div class="flex flex-col">
+      {
+        categories.map(({ name, slug }) => (
+          <a
+            href={'/category/' + slug}
+            class="group flex items-center gap-3 text-2xl font-semibold"
+          >
+            <div class="grid h-5 w-5 place-items-center overflow-hidden rounded-full border-1 border-dark-gray">
+              <div
+                class={clsx(
+                  'h-5 w-5 scale-0 rounded-full bg-black duration-300 group-hover:scale-100',
+                  {
+                    'scale-100': urlSlug === slug
+                  }
+                )}
+              />
+            </div>
+            <span>{name}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <div>
+    <p class="pb-6">Featured</p>
+    <div class="flex flex-col gap-5">
+      {
+        latestPosts.map((post, i) => (
+          <CategoriesFeatured
+            {...post}
+            transition:animate={slide({ duration: i * 1 })}
           />
-        </div>
-        <span>{name}</span>
-      </a>
-    ))
-  }
+        ))
+      }
+    </div>
+  </div>
 </div>

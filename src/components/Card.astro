@@ -2,10 +2,12 @@
 import { dateFormat } from '@/utils/helper'
 import { Image } from 'astro:assets'
 import { twMerge } from 'tailwind-merge'
+import CategoryTag from './CategoryTag.astro'
 
 interface Props extends IPost {
   cardContainerClass?: string
   className?: string
+  imgContainerClass?: string
 }
 
 const {
@@ -15,8 +17,7 @@ const {
   date,
   link,
   slug,
-  className,
-  cardContainerClass
+  imgContainerClass
 }: Props = Astro.props
 
 const res = await fetch(
@@ -40,7 +41,12 @@ const postCategories: ICategory[] = await Promise.all(
 
 <div class="flex flex-col gap-5">
   <a href={`/${slug}`}>
-    <div class="h-60 overflow-hidden rounded-md 2xl:h-72">
+    <div
+      class={twMerge(
+        'h-60 overflow-hidden rounded-md 2xl:h-72',
+        imgContainerClass
+      )}
+    >
       <Image
         width={700}
         height={300}
@@ -57,19 +63,7 @@ const postCategories: ICategory[] = await Promise.all(
   <div class="">
     <div class="flex items-center">
       <div class="flex">
-        {
-          postCategories.map(category => (
-            <a
-              href={'/category/' + category.slug}
-              class={twMerge(
-                'mr-3 rounded-md bg-light-gray px-3 py-1 text-sm uppercase text-dark-gray duration-300 hover:bg-black hover:text-white',
-                className
-              )}
-            >
-              {category.name}
-            </a>
-          ))
-        }
+        {postCategories.map(category => <CategoryTag category={category} />)}
       </div>
       <p class="text-sm text-dark-gray">{dateFormat(date)}</p>
     </div>

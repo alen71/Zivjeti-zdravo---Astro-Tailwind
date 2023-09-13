@@ -1,0 +1,20 @@
+---
+import { twMerge } from 'tailwind-merge'
+
+type Props = {
+  category: ICategory
+  className?: string
+}
+
+const { category, className } = Astro.props
+---
+
+<a
+  href={'/category/' + category.slug}
+  class={twMerge(
+    'mr-3 rounded-md bg-light-gray px-3 py-1 text-sm uppercase text-dark-gray duration-300 hover:bg-black hover:text-white',
+    className
+  )}
+>
+  {category.name}
+</a>
