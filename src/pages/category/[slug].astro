@@ -1,20 +1,22 @@
 ---
 export const prerender = true
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import CategoriesAside from '../../components/CategoriesAside.astro'
+
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+import CategoriesAside from '@/components/CategoriesAside.astro'
 import Card from '@/components/Card.astro'
-import type { Code } from 'astro:components'
+
+import { getCategories, getCategoryBySlug } from '@/lib/categories'
+import { getPostsByCategoryId } from '@/lib/posts'
 
 export interface ICategoryList extends ICategory {
   childCategories?: ICategory[]
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(
-    'https://wp.zivjetizdravo.com/wp-json/wp/v2/categories?per_page=20'
+  const categories = await getCategories(
+    'https://wp.zivjetizdravo.com/wp-json/wp/v2/categories?per_page=50'
   )
-
-  const categories: ICategory[] = await res.json()
 
   const mainCategories: ICategoryList[] = categories.filter(category => {
     const childCategories = categories.filter(
@@ -41,19 +43,9 @@ export async function getStaticPaths() {
 const { slug } = Astro.params
 const { categories } = Astro.props
 
-const curCategoryRes = await fetch(
-  `https://wp.zivjetizdravo.com/wp-json/wp/v2/categories?slug=${slug}`
-)
-const curCategory: ICategory[] = await curCategoryRes.json()
+const category = await getCategoryBySlug(slug)
 
-const category = curCategory[0]
-
-console.log(category.id)
-
-const postsRes = await fetch(
-  `https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?categories=${category.id}`
-)
-const posts: IPost[] = await postsRes.json()
+const posts = await getPostsByCategoryId(category.id)
 ---
 
 <BaseLayout>

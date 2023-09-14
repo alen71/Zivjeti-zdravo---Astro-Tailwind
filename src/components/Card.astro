@@ -3,6 +3,8 @@ import { dateFormat } from '@/utils/helper'
 import { Image } from 'astro:assets'
 import { twMerge } from 'tailwind-merge'
 import CategoryTag from './CategoryTag.astro'
+import { getFeaturedImage } from '@/lib/media'
+import { getCategoryById } from '@/lib/categories'
 
 interface Props extends IPost {
   cardContainerClass?: string
@@ -20,26 +22,18 @@ const {
   imgContainerClass
 }: Props = Astro.props
 
-const res = await fetch(
-  `https://wp.zivjetizdravo.com/wp-json/wp/v2/media/${featured_media}`
-)
+const featuredImage = await getFeaturedImage(featured_media)
 
-const featuredImage = await res.json()
-
-const postCategories: ICategory[] = await Promise.all(
+const postCategories = await Promise.all(
   categories.map(async category => {
-    const res = await fetch(
-      `https://wp.zivjetizdravo.com/wp-json/wp/v2/categories/${category}`
-    )
-
-    const data = await res.json()
+    const data = await getCategoryById(category)
 
     return data
   })
 )
 ---
 
-<div class="flex flex-col gap-5">
+<article class="flex flex-col gap-5">
   <a href={`/${slug}`}>
     <div
       class={twMerge(
@@ -71,4 +65,4 @@ const postCategories: ICategory[] = await Promise.all(
       <h2 class="mt-6 text-2xl">{title.rendered}</h2>
     </a>
   </div>
-</div>
+</article>

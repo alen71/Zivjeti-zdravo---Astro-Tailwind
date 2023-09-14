@@ -1,19 +1,20 @@
 ---
-import type { ICategoryList } from '@/pages/category/[slug].astro'
-
-import clsx from 'clsx'
-import CategoriesFeatured from './CategoriesFeatured.astro'
 import { slide } from 'astro:transitions'
+import clsx from 'clsx'
+
+import type { ICategoryList } from '@/pages/category/[slug].astro'
+import CategoriesFeatured from './CategoriesFeatured.astro'
+
+import { getPosts } from '@/lib/posts'
 
 type Props = {
   categories: ICategoryList[]
   urlSlug: string
 }
 
-const latestPostsRes = await fetch(
+const latestPosts = await getPosts(
   'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?per_page=3'
 )
-const latestPosts: IPost[] = await latestPostsRes.json()
 
 const { categories, urlSlug }: Props = Astro.props
 ---

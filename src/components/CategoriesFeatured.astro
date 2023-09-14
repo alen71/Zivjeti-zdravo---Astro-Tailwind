@@ -1,32 +1,27 @@
 ---
 import { Image } from 'astro:assets'
 import CategoryTag from './CategoryTag.astro'
-import { slide } from 'astro:transitions'
+
+import { getFeaturedImage } from '@/lib/media'
+
+import { getCategoryById } from '@/lib/categories'
 
 interface Props extends IPost {}
 
-const { featured_media, categories, title }: Props = Astro.props
+const { featured_media, categories, title, slug }: Props = Astro.props
 
-const res = await fetch(
-  `https://wp.zivjetizdravo.com/wp-json/wp/v2/media/${featured_media}`
-)
+const featuredImage = await getFeaturedImage(featured_media)
 
-const featuredImage = await res.json()
-
-const postCategories: ICategory[] = await Promise.all(
+const postCategories = await Promise.all(
   categories.map(async category => {
-    const res = await fetch(
-      `https://wp.zivjetizdravo.com/wp-json/wp/v2/categories/${category}`
-    )
-
-    const data = await res.json()
+    const data = await getCategoryById(category)
 
     return data
   })
 )
 ---
 
-<a href="#" class="">
+<a href={`/${slug}`} class="">
   <div class="flex flex-row items-center gap-5">
     <div class="relative h-[6.25rem] w-[6.25rem] overflow-hidden rounded-full">
       <Image

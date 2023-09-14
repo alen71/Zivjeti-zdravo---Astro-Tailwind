@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+import { getCategories, getCategoryById } from '@/lib/categories'
+import { getFeaturedImage } from '@/lib/media'
+import { getPosts } from '@/lib/posts'
+import { getPostBySlug } from '@/lib/posts'
+import type { IMedia } from '@/types/mediaTypes'
+import { Image } from 'astro:assets'
+
+const { slug } = Astro.params
+
+// const post = await getPostBySlug(slug)
+
+// const postCategories = await Promise.all(
+//   post.categories.map(async category => {
+//     const data = await getCategoryById(category)
+
+//     return data
+//   })
+// )
+
+// const featuredImage = await getFeaturedImage(post.featured_media)
+
+export async function getStaticPaths() {
+  const allPosts = await getPosts(
+    'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts'
+  )
+
+  const paths = Promise.all(
+    allPosts.map(async post => {
+      const postCategories = await Promise.all(
+        post.categories.map(async category => {
+          const data = await getCategoryById(category)
+
+          return data
+        })
+      )
+
+      const featuredImage = await getFeaturedImage(post.featured_media)
+
+      return {
+        params: {
+          slug: post.slug
+        },
+        props: { post, postCategories, featuredImage }
+      }
+    })
+  )
+
+  return paths
+}
+
+type Props = {
+  post: IPost
+  postCategories: ICategory[]
+  featuredImage: IMedia
+}
+
+const { post, postCategories, featuredImage }: Props = Astro.props
+---
+
+<BaseLayout title={post.title.rendered}>
+  <Image width={1000} height={500} src={featuredImage.source_url} alt="" />
+
+  <div set:html={post.content.rendered} />
+</BaseLayout>

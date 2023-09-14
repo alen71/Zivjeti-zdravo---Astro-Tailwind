@@ -3,11 +3,11 @@ import Card from '@/components/Card.astro'
 import LatestCard from '@/components/CardLatest.astro'
 import MainBtn from '@/components/MainBtn.astro'
 import Layout from '@/layouts/BaseLayout.astro'
+import { getPosts } from '@/lib/posts'
 
-const latestPostsRes = await fetch(
+const latestPosts = await getPosts(
   'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?per_page=3'
 )
-const latestPosts: IPost[] = await latestPostsRes.json()
 
 const latestPostsClasses = [
   'col-start-1 col-end-2 row-start-1 row-end-3',
@@ -15,10 +15,9 @@ const latestPostsClasses = [
   'col-start-2 col-end-3 row-start-2 row-end-3'
 ]
 
-const postsRes = await fetch(
+const posts = await getPosts(
   'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?offset=0&per_page=9'
 )
-const posts: IPost[] = await postsRes.json()
 ---
 
 <Layout title="Živjeti zdravo">
