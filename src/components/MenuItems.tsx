@@ -1,8 +1,10 @@
+import { useStore } from '@nanostores/react'
+import { motion } from 'framer-motion'
+
 import { isMenuOpen } from '@/components/MenuBtn'
-import { useStore } from '@nanostores/preact'
 
 export default function NavMenuItems() {
   const $isMenuOpen = useStore(isMenuOpen)
 
-  return <div>NavMenuItems</div>
+  return <motion.div>NavMenuItems</motion.div>
 }

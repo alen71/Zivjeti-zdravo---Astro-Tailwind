@@ -1,0 +1,16 @@
+.posts-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  p {
+  }
+
+  ul {
+    list-style: disc;
+
+    li {
+      margin-left: 2rem;
+    }
+  }
+}

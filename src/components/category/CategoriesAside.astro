@@ -19,20 +19,20 @@ const latestPosts = await getPosts(
 const { categories, urlSlug }: Props = Astro.props
 ---
 
-<div class="flex flex-col gap-20">
+<div class="flex flex-col gap-[4.4rem]">
   <div>
-    <p class="pb-6">Kategorije</p>
-    <div class="flex flex-col">
+    <p class="pb-6 font-semibold">Kategorije</p>
+    <div class="flex flex-col gap-4">
       {
         categories.map(({ name, slug }) => (
           <a
             href={'/category/' + slug}
             class="group flex items-center gap-3 text-2xl font-semibold"
           >
-            <div class="grid h-5 w-5 place-items-center overflow-hidden rounded-full border-1 border-dark-gray">
+            <div class="relative grid h-5 w-5 place-items-center overflow-hidden rounded-full border-1 border-dark-gray">
               <div
                 class={clsx(
-                  'h-5 w-5 scale-0 rounded-full bg-black duration-300 group-hover:scale-100',
+                  'absolute h-full w-full rounded-full bg-black duration-300 scale-0 group-hover:scale-100',
                   {
                     'scale-100': urlSlug === slug
                   }
@@ -47,8 +47,8 @@ const { categories, urlSlug }: Props = Astro.props
   </div>
 
   <div>
-    <p class="pb-6">Featured</p>
-    <div class="flex flex-col gap-5">
+    <p class="pb-6 font-semibold">Featured</p>
+    <div class="flex flex-col gap-6">
       {
         latestPosts.map((post, i) => (
           <CategoriesFeatured

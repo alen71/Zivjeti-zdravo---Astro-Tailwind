@@ -37,21 +37,21 @@ const postCategories = await Promise.all(
 
 <article
   class={twMerge(
-    'relative overflow-hidden rounded-md cursor-pointer',
+    'relative overflow-hidden rounded-2xl cursor-pointer duration-300 hover:scale-[1.03] hover:shadow-2xl',
     cardContainerClass
   )}
 >
   <a href={`/${slug}`}>
-    <Image
-      width={1600}
-      height={900}
-      src={featuredImage.source_url}
-      alt={title.rendered}
-      decoding="async"
-      loading="lazy"
-      format="webp"
-      class="h-full w-full object-cover object-center"
-    />
+    <div>
+      <Image
+        width={1000}
+        height={500}
+        src={featuredImage.source_url}
+        alt={title.rendered}
+        format="webp"
+        class="h-full w-full object-cover object-center"
+      />
+    </div>
     <div
       class="absolute bottom-0 left-0 flex w-full flex-col gap-2 bg-black/25 p-6 backdrop-blur-sm"
     >

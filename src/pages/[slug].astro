@@ -1,12 +1,17 @@
 ---
+export const prerender = true
+
+import CategoryTag from '@/components/CategoryTag.astro'
+import '../style/post.css'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 
-import { getCategories, getCategoryById } from '@/lib/categories'
+import { getCategoryById } from '@/lib/categories'
 import { getFeaturedImage } from '@/lib/media'
 import { getPosts } from '@/lib/posts'
-import { getPostBySlug } from '@/lib/posts'
+
 import type { IMedia } from '@/types/mediaTypes'
 import { Image } from 'astro:assets'
+import { dateFormat } from '@/utils/helper'
 
 const { slug } = Astro.params
 
@@ -61,7 +66,28 @@ const { post, postCategories, featuredImage }: Props = Astro.props
 ---
 
 <BaseLayout title={post.title.rendered}>
-  <Image width={1000} height={500} src={featuredImage.source_url} alt="" />
+  <div class="relative h-[25rem] overflow-hidden rounded-2xl">
+    <Image
+      width={1000}
+      height={500}
+      src={featuredImage.source_url}
+      alt={post.title.rendered}
+      format="webp"
+      class="h-full w-full object-cover"
+    />
+  </div>
 
-  <div set:html={post.content.rendered} />
+  <div class="mx-auto my-16 flex max-w-[47rem] flex-col gap-5">
+    <div class="">
+      {postCategories.map(category => <CategoryTag category={category} />)}
+    </div>
+
+    <p>{dateFormat(post.date)}</p>
+  </div>
+
+  <div class="mx-auto max-w-[47rem]">
+    <h1 class="mb-16">{post.title.rendered}</h1>
+
+    <div class="posts-content" set:html={post.content.rendered} />
+  </div>
 </BaseLayout>

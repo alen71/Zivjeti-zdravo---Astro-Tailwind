@@ -4,6 +4,8 @@ import LatestCard from '@/components/CardLatest.astro'
 import MainBtn from '@/components/MainBtn.astro'
 import Layout from '@/layouts/BaseLayout.astro'
 import { getPosts } from '@/lib/posts'
+import { Image } from 'astro:assets'
+import imgSrc from 'public/images/test.jsg.jpeg'
 
 const latestPosts = await getPosts(
   'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?per_page=3'
@@ -40,7 +42,7 @@ const posts = await getPosts(
         <LatestCard
           {...post}
           cardContainerClass={latestPostsClasses[i]}
-          {...(i === 0 && { headingClass: 'text-4xl' })}
+          {...(i === 0 && { headingClass: 'text-4xl mt-2' })}
         />
       ))
     }

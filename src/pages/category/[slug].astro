@@ -3,11 +3,11 @@ export const prerender = true
 
 import BaseLayout from '@/layouts/BaseLayout.astro'
 
-import CategoriesAside from '@/components/CategoriesAside.astro'
 import Card from '@/components/Card.astro'
 
 import { getCategories, getCategoryBySlug } from '@/lib/categories'
 import { getPostsByCategoryId } from '@/lib/posts'
+import CategoriesAside from '@/components/category/CategoriesAside.astro'
 
 export interface ICategoryList extends ICategory {
   childCategories?: ICategory[]
@@ -51,7 +51,15 @@ const posts = await getPostsByCategoryId(category.id)
 <BaseLayout>
   <div class="grid grid-cols-[1fr_20rem] gap-24">
     <div class="flex flex-col gap-20">
-      {posts.map(post => <Card {...post} imgContainerClass="h-[30rem]" />)}
+      {
+        posts.map(post => (
+          <Card
+            {...post}
+            imgContainerClass="2xl:h-[30rem]"
+            titleClass="text-5xl mt-8"
+          />
+        ))
+      }
     </div>
 
     <aside class="flex flex-col">

@@ -1,0 +1,11 @@
+.posts-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.posts-content ul {
+  list-style: disc;
+}
+.posts-content ul li {
+  margin-left: 2rem;
+}

@@ -10,6 +10,7 @@ interface Props extends IPost {
   cardContainerClass?: string
   className?: string
   imgContainerClass?: string
+  titleClass?: string
 }
 
 const {
@@ -19,7 +20,8 @@ const {
   date,
   link,
   slug,
-  imgContainerClass
+  imgContainerClass,
+  titleClass
 }: Props = Astro.props
 
 const featuredImage = await getFeaturedImage(featured_media)
@@ -33,23 +35,24 @@ const postCategories = await Promise.all(
 )
 ---
 
-<article class="flex flex-col gap-5">
-  <a href={`/${slug}`}>
+<article class="flex flex-col gap-6">
+  <a href={`/${slug}`} class="">
     <div
+      transition:name="featured image"
       class={twMerge(
-        'h-60 overflow-hidden rounded-md 2xl:h-72',
+        'h-60 overflow-hidden rounded-2xl 2xl:h-72 duration-300 hover:scale-[1.03] hover:shadow-2xl',
         imgContainerClass
       )}
+      transition:name={slug}
+      transition:persist
     >
       <Image
-        width={700}
-        height={300}
+        width={1000}
+        height={500}
         src={featuredImage.source_url}
         alt={title.rendered}
-        decoding="async"
-        loading="lazy"
         format="webp"
-        class="h-full w-full object-cover object-center"
+        class="h-full w-full object-cover"
       />
     </div>
   </a>
@@ -61,8 +64,8 @@ const postCategories = await Promise.all(
       </div>
       <p class="text-sm text-dark-gray">{dateFormat(date)}</p>
     </div>
-    <a href={link}>
-      <h2 class="mt-6 text-2xl">{title.rendered}</h2>
+    <a href={`/${slug}`}>
+      <h2 class={twMerge('mt-6 text-2xl', titleClass)}>{title.rendered}</h2>
     </a>
   </div>
 </article>
