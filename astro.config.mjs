@@ -17,10 +17,10 @@ export default defineConfig({
   adapter: nodejs({
     mode: 'middleware'
   }),
-  image: {
-    domains: ['wp.zivjetizdravo.com'],
-    remotePatterns: [{
-      protocol: 'https'
-    }]
-  }
+  // image: {
+  //   domains: ['wp.zivjetizdravo.com'],
+  //   remotePatterns: [{
+  //     protocol: 'https'
+  //   }]
+  // }
 });
