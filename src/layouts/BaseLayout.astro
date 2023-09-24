@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions'
+import { twMerge } from 'tailwind-merge'
 
 import '@fontsource-variable/manrope'
 import '@/style/base.css'
@@ -9,9 +10,10 @@ import Footer from './Footer.astro'
 
 interface Props {
   title?: string
+  mainClass?: string
 }
 
-const { title } = Astro.props
+const { mainClass, title }: Props = Astro.props
 ---
 
 <!doctype html>
@@ -27,7 +29,10 @@ const { title } = Astro.props
   </head>
   <body>
     <Nav client:load />
-    <main class="container pb-24 pt-56">
+    <main
+      class={twMerge('container pb-24 pt-36 lg:pt-56', mainClass)}
+      transition:animate="initial"
+    >
       <slot />
     </main>
     <Footer />

@@ -34,7 +34,10 @@ export default function MenuBtn() {
   return (
     <button
       className="group relative z-50 h-5 w-6"
-      onClick={() => isMenuOpen.set(!$isMenuOpen)}
+      onClick={() => {
+        isMenuOpen.set(!$isMenuOpen)
+        document.querySelector('html').classList.toggle('stop-scroll')
+      }}
     >
       <motion.div
         initial="visible"

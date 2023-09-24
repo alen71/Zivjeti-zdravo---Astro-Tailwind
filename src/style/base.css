@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html.stop-scroll {
+  overflow: hidden;
+}
+
 body {
   font-family: theme(fontFamily.manrope);
   font-weight: 400;
@@ -9,7 +13,6 @@ body {
 
 h1 {
   font-size: theme(fontSize.6xl);
-  line-height: 65px;
   font-weight: 700;
   letter-spacing: -0.4px;
 }
@@ -30,4 +33,16 @@ h4 {
   font-size: theme(fontSize.3xl);
   font-weight: 700;
   letter-spacing: -0.4px;
+}
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: theme(fontSize.5xl);
+  }
+}
+@media (max-width: 640px) {
+  h1 {
+    font-size: theme(fontSize.4xl);
+    line-height: 1.3;
+  }
 }

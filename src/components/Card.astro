@@ -62,10 +62,17 @@ const postCategories = await Promise.all(
       <div class="flex">
         {postCategories.map(category => <CategoryTag category={category} />)}
       </div>
-      <p class="text-sm text-dark-gray">{dateFormat(date)}</p>
+      <p class="text-[0.75rem] text-dark-gray sm:text-sm">{dateFormat(date)}</p>
     </div>
     <a href={`/${slug}`}>
-      <h2 class={twMerge('mt-6 text-2xl', titleClass)}>{title.rendered}</h2>
+      <h2
+        class={twMerge(
+          'mt-4 sm:mt-6 text-lg sm:text-xl md:text-2xl',
+          titleClass
+        )}
+      >
+        {title.rendered}
+      </h2>
     </a>
   </div>
 </article>

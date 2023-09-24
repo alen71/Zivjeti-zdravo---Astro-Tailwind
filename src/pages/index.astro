@@ -4,17 +4,15 @@ import LatestCard from '@/components/CardLatest.astro'
 import MainBtn from '@/components/MainBtn.astro'
 import Layout from '@/layouts/BaseLayout.astro'
 import { getPosts } from '@/lib/posts'
-import { Image } from 'astro:assets'
-import imgSrc from 'public/images/test.jsg.jpeg'
 
 const latestPosts = await getPosts(
   'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?per_page=3'
 )
 
 const latestPostsClasses = [
-  'col-start-1 col-end-2 row-start-1 row-end-3',
-  'col-start-2 col-end-3 row-start-1 row-end-2',
-  'col-start-2 col-end-3 row-start-2 row-end-3'
+  'sm:col-start-1 sm:col-end-2 sm:row-start-1 sm:row-end-3 h-[70vw] sm:h-[43.75rem]',
+  'sm:col-start-2 sm:col-end-3 sm:row-start-1 sm:row-end-2 h-[60vw] sm:h-[20.875rem]',
+  'sm:col-start-2 sm:col-end-3 sm:row-start-2 sm:row-end-3 h-[60vw] sm:h-[20.875rem]'
 ]
 
 const posts = await getPosts(
@@ -27,7 +25,7 @@ const posts = await getPosts(
     Prirodni cjeloviti <br /> biljni recepti
   </h1>
 
-  <p class="mx-auto mt-8 max-w-4xl px-6 text-center">
+  <p class="mx-auto mt-8 max-w-4xl text-center">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
     tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -36,13 +34,17 @@ const posts = await getPosts(
     non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
 
-  <div class="mt-24 grid max-h-[45rem] grid-cols-[60fr_40fr] grid-rows-2 gap-8">
+  <div
+    class="mt-20 grid gap-6 sm:grid-cols-[60fr_40fr] sm:grid-rows-2 lg:mt-24 lg:gap-8"
+  >
     {
       latestPosts.map((post, i) => (
         <LatestCard
           {...post}
           cardContainerClass={latestPostsClasses[i]}
-          {...(i === 0 && { headingClass: 'text-4xl mt-2' })}
+          {...(i === 0 && {
+            headingClass: 'text-2xl sm:text-3xl lg:text-4xl sm:mt-2'
+          })}
         />
       ))
     }
@@ -50,7 +52,7 @@ const posts = await getPosts(
 
   <div class="my-12 h-1 w-full bg-light-gray"></div>
 
-  <div class="grid max-h-[45rem] grid-cols-3 gap-8">
+  <div class="grid gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
     {posts.map((post, i) => <Card {...post} />)}
   </div>
 

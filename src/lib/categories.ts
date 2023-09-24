@@ -1,5 +1,9 @@
-export const getCategories = async (url: string) => {
-  const res = await fetch(url)
+export const getCategories = async (url?: string) => {
+  const res = await fetch(
+    url
+      ? url
+      : 'https://wp.zivjetizdravo.com/wp-json/wp/v2/categories?per_page=50'
+  )
 
   const categories: ICategory[] = await res.json()
 

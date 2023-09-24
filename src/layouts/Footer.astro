@@ -35,13 +35,13 @@ const footerNav = [
 <footer>
   <div class="container">
     <div
-      class="relative grid grid-cols-3 items-center justify-center py-14 font-semibold"
+      class="relative flex flex-col-reverse items-center justify-center gap-10 pt-10 font-semibold sm:pt-14 lg:grid lg:grid-cols-3 lg:gap-0"
     >
       <div class="absolute left-0 top-0 h-1 w-full bg-light-gray"></div>
 
       <Logo />
 
-      <ul class="list-none text-center">
+      <ul class="flex list-none flex-col gap-3 text-center">
         {
           footerSocial.map(({ text, href }) => (
             <li>
@@ -51,7 +51,7 @@ const footerNav = [
         }
       </ul>
 
-      <ul class="list-none text-center">
+      <ul class="flex list-none flex-col gap-3 text-center">
         {
           footerNav.map(({ text, href }) => (
             <li>
@@ -61,5 +61,17 @@ const footerNav = [
         }
       </ul>
     </div>
+
+    <p class="mt-10 pb-14 text-center lg:mt-14">
+      Dizajn i development:{' '}
+      <a
+        href="https://bluestudio.rs"
+        rel="nofollow"
+        target="_blank"
+        class="underline"
+      >
+        Bluestudio
+      </a>
+    </p>
   </div>
 </footer>

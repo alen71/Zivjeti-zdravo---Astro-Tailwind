@@ -1,11 +1,11 @@
 ---
 import { slide } from 'astro:transitions'
-import clsx from 'clsx'
 
 import type { ICategoryList } from '@/pages/category/[slug].astro'
 import CategoriesFeatured from './CategoriesFeatured.astro'
 
 import { getPosts } from '@/lib/posts'
+import CategoryLink from './CategoryLink'
 
 type Props = {
   categories: ICategoryList[]
@@ -21,33 +21,18 @@ const { categories, urlSlug }: Props = Astro.props
 
 <div class="flex flex-col gap-[4.4rem]">
   <div>
-    <p class="pb-6 font-semibold">Kategorije</p>
+    <p class="pb-6 text-lg font-semibold sm:text-base">Kategorije</p>
     <div class="flex flex-col gap-4">
       {
-        categories.map(({ name, slug }) => (
-          <a
-            href={'/category/' + slug}
-            class="group flex items-center gap-3 text-2xl font-semibold"
-          >
-            <div class="relative grid h-5 w-5 place-items-center overflow-hidden rounded-full border-1 border-dark-gray">
-              <div
-                class={clsx(
-                  'absolute h-full w-full rounded-full bg-black duration-300 scale-0 group-hover:scale-100',
-                  {
-                    'scale-100': urlSlug === slug
-                  }
-                )}
-              />
-            </div>
-            <span>{name}</span>
-          </a>
+        categories.map(category => (
+          <CategoryLink client:load {...category} urlSlug={urlSlug} />
         ))
       }
     </div>
   </div>
 
   <div>
-    <p class="pb-6 font-semibold">Featured</p>
+    <p class="pb-6 text-lg font-semibold sm:text-base">Featured</p>
     <div class="flex flex-col gap-6">
       {
         latestPosts.map((post, i) => (
@@ -60,3 +45,4 @@ const { categories, urlSlug }: Props = Astro.props
     </div>
   </div>
 </div>
+ ./CategoryLink

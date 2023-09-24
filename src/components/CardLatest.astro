@@ -37,31 +37,36 @@ const postCategories = await Promise.all(
 
 <article
   class={twMerge(
-    'relative overflow-hidden rounded-2xl cursor-pointer duration-300 hover:scale-[1.03] hover:shadow-2xl',
+    'relative overflow-hidden rounded-2xl cursor-pointer duration-300 hover:scale-[1.03] hover:shadow-2xl ',
     cardContainerClass
   )}
 >
-  <a href={`/${slug}`}>
-    <div>
+  <a href={`/${slug}`} class="block h-fit">
+    <div class="absolute inset-0 h-full w-full">
       <Image
-        width={1000}
+        width={800}
         height={500}
         src={featuredImage.source_url}
         alt={title.rendered}
         format="webp"
-        class="h-full w-full object-cover object-center"
+        class="min-h-full w-full object-cover object-center"
       />
     </div>
     <div
-      class="absolute bottom-0 left-0 flex w-full flex-col gap-2 bg-black/25 p-6 backdrop-blur-sm"
+      class="absolute bottom-0 left-0 flex w-full flex-col bg-black/25 p-4 sm:backdrop-blur-sm lg:p-6"
     >
-      <div class="flex items-center">
+      <div class="mb-2 flex items-center">
         <div class="flex">
           {postCategories.map(category => <CategoryTag category={category} />)}
         </div>
-        <p class="text-sm text-white">{dateFormat(date)}</p>
+        <p class="text-[0.75rem] text-white sm:text-sm">{dateFormat(date)}</p>
       </div>
-      <h2 class={twMerge('text-2xl text-white', headingClass)}>
+      <h2
+        class={twMerge(
+          'text-lg sm:text-xl lg:text-2xl text-white',
+          headingClass
+        )}
+      >
         {title.rendered}
       </h2>
     </div>
