@@ -10,7 +10,8 @@ export default defineConfig({
   compressHTML: false,
   output: 'hybrid',
   adapter: netlify({
-    edgeMiddleware: true
+    edgeMiddleware: true,
+    functionPerRoute: true,
   }),
   // adapter: nodejs({
   //   mode: 'middleware'
