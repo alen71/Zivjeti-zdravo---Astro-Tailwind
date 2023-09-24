@@ -51,15 +51,17 @@ const footerNav = [
         }
       </ul>
 
-      <ul class="flex list-none flex-col gap-3 text-center">
-        {
-          footerNav.map(({ text, href }) => (
-            <li>
-              <a href={href}>{text}</a>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="flex list-none flex-col gap-3 text-center">
+        <p>Kontakt:</p>
+        <a
+          href="mailto:zivjetizdravo7@gmail.com"
+          rel="nofollow"
+          target="_blank"
+          class="hover:underline"
+        >
+          zivjetizdravo7@gmail.com
+        </a>
+      </div>
     </div>
 
     <p class="mt-10 pb-14 text-center lg:mt-14">
