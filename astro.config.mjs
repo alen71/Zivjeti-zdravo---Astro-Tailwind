@@ -9,7 +9,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   integrations: [tailwind(), react()],
   compressHTML: false,
-  output: 'hybrid',
+  output: 'server',
   adapter: netlify({
     edgeMiddleware: true,
     functionPerRoute: true,
