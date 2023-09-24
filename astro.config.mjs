@@ -10,13 +10,13 @@ export default defineConfig({
   integrations: [tailwind(), react()],
   compressHTML: false,
   output: 'hybrid',
-  // adapter: netlify({
-  //   edgeMiddleware: true,
-  //   functionPerRoute: true,
-  // }),
-  adapter: nodejs({
-    mode: 'middleware'
+  adapter: netlify({
+    edgeMiddleware: true,
+    functionPerRoute: true,
   }),
+  // adapter: nodejs({
+  //   mode: 'middleware'
+  // }),
   // image: {
   //   domains: ['wp.zivjetizdravo.com'],
   //   remotePatterns: [{
