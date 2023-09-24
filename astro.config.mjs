@@ -8,15 +8,17 @@ import react from '@astrojs/react';
 export default defineConfig({
   integrations: [tailwind(), react()],
   compressHTML: false,
-  // output: 'hybrid',
-  adapter: netlify(),
+  output: 'hybrid',
+  adapter: netlify({
+    edgeMiddleware: true
+  }),
   // adapter: nodejs({
   //   mode: 'middleware'
   // }),
-  // image: {
-  //   domains: ['wp.zivjetizdravo.com'],
-  //   remotePatterns: [{
-  //     protocol: 'https'
-  //   }]
-  // }
+  image: {
+    domains: ['wp.zivjetizdravo.com'],
+    remotePatterns: [{
+      protocol: 'https'
+    }]
+  }
 });
