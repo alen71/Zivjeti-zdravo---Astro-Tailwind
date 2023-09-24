@@ -28,13 +28,17 @@ export async function getStaticPaths() {
         return { ...category, childCategories }
     })
 
-  const paths = categories.map(category => {
-    return {
+  let paths = []
+
+  categories.map(category => {
+    if (category.id === 1) return
+
+    paths.push({
       params: {
         slug: category.slug
       },
       props: { categories: mainCategories }
-    }
+    })
   })
 
   return paths

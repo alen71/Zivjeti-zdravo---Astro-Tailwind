@@ -7,7 +7,7 @@ import nodejs from '@astrojs/node'
 export default defineConfig({
   integrations: [tailwind(), react()],
   compressHTML: false,
-  output: 'server',
+  output: 'hybrid',
   adapter: nodejs({
     mode: 'middleware'
   }),
