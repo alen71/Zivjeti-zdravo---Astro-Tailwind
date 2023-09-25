@@ -1,3 +1,0 @@
-[build]
-  command = "yarn build" # Adjust to your actual build command
-  publish = "public"     # Adjust to your build output directory
