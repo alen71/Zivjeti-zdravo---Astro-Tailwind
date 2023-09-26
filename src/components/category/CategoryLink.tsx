@@ -9,7 +9,7 @@ import type { ICategoryList } from '@/pages/category/[slug].astro'
 import {
   categoryLinkContainer,
   categoryLinkVariants
-} from '@/utils/variants/categoryLinkVarians'
+} from '@/utils/variants/categoryLinkVarians.astro'
 
 type Props = ICategoryList & {
   urlSlug: string
@@ -34,7 +34,7 @@ const CategoryLink = ({ childCategories, slug, name, urlSlug }: Props) => {
           <div className="relative grid h-5 w-5 place-items-center overflow-hidden rounded-full border-1 border-dark-gray">
             <div
               className={clsx(
-                'absolute h-full w-full rounded-full bg-black duration-300 scale-0 group-hover:scale-100',
+                'absolute h-full w-full scale-0 rounded-full bg-black duration-300 group-hover:scale-100',
                 {
                   'scale-100': urlSlug === slug
                 }
@@ -47,9 +47,10 @@ const CategoryLink = ({ childCategories, slug, name, urlSlug }: Props) => {
         {childCategories.length > 0 && (
           <div
             className={clsx(
-              'p- absolute right-3 grid h-6 w-6 cursor-pointer place-items-center duration-300 rotate-180',
+              'p- absolute right-3 grid h-6 w-6 cursor-pointer place-items-center duration-300 ',
               {
-                'rotate-0': open
+                'rotate-0': open,
+                'rotate-180': !open
               }
             )}
             onClick={e => {
@@ -90,7 +91,7 @@ const CategoryLink = ({ childCategories, slug, name, urlSlug }: Props) => {
                 <div className="relative grid h-4 w-4 place-items-center overflow-hidden rounded-full border-1 border-dark-gray">
                   <div
                     className={clsx(
-                      'absolute h-full w-full rounded-full bg-black duration-300 scale-0 group-hover:scale-100',
+                      'absolute h-full w-full scale-0 rounded-full bg-black duration-300 group-hover:scale-100',
                       {
                         'scale-100': urlSlug === slug
                       }

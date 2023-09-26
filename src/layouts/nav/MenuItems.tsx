@@ -9,7 +9,7 @@ import {
   menuContainerVariants,
   menuItemsVariants,
   shadowVariants
-} from '@/utils/variants/menuItemsVariants'
+} from '@/utils/variants/menuItemsVariants.astro'
 
 import useGetCategories from '@/hooks/useGetCategories'
 
