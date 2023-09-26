@@ -1,6 +1,4 @@
 ---
-
-
 import CategoryTag from '@/components/CategoryTag.astro'
 import '../style/post.css'
 import BaseLayout from '@/layouts/BaseLayout.astro'
@@ -11,7 +9,7 @@ import { getPosts } from '@/lib/posts'
 
 import type { IMedia } from '@/types/mediaTypes'
 import { Image } from 'astro:assets'
-import { dateFormat } from '@/utils/helper'
+import { dateFormat } from '@/utils/helper.astro'
 
 export async function getStaticPaths() {
   const allPosts = await getPosts(

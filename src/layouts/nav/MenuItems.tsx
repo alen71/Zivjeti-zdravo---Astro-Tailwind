@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 import { isMenuOpen } from '@/layouts/nav/MenuBtn'
 
-import { social } from '@/utils/social'
+import { social } from '@/utils/social.astro'
 
 import {
   menuContainerVariants,
