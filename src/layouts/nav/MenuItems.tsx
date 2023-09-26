@@ -23,7 +23,7 @@ export default function NavMenuItems() {
       initial="closed"
       animate={$isMenuOpen ? 'open' : 'closed'}
       variants={menuContainerVariants}
-      className="absolute bottom-0 z-0 w-full  bg-white translate-y-full"
+      className="absolute bottom-0 z-0 w-full  translate-y-full bg-white"
     >
       <motion.div
         variants={shadowVariants}
@@ -40,7 +40,17 @@ export default function NavMenuItems() {
                 if (name === 'unrecognized') return
                 return (
                   <li key={name}>
-                    <a href={'/category/' + slug}>{name}</a>
+                    <a
+                      href={'/category/' + slug}
+                      onClick={() => {
+                        isMenuOpen.set(!$isMenuOpen)
+                        document
+                          .querySelector('html')
+                          .classList.toggle('stop-scroll')
+                      }}
+                    >
+                      {name}
+                    </a>
                   </li>
                 )
               })}
@@ -52,7 +62,17 @@ export default function NavMenuItems() {
             <ul className="flex flex-col items-center gap-3">
               {social.map(({ href, name }) => (
                 <li key={name}>
-                  <a href={href}>{name}</a>
+                  <a
+                    href={href}
+                    onClick={() => {
+                      isMenuOpen.set(!$isMenuOpen)
+                      document
+                        .querySelector('html')
+                        .classList.toggle('stop-scroll')
+                    }}
+                  >
+                    {name}
+                  </a>
                 </li>
               ))}
             </ul>

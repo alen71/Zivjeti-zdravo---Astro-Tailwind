@@ -1,51 +1,36 @@
 ---
 import Logo from '@/components/Logo.tsx'
-
-const footerSocial = [
-  {
-    text: 'facebook',
-    href: '#'
-  },
-  {
-    text: 'instagram',
-    href: '#'
-  },
-  {
-    text: 'twitter',
-    href: '#'
-  }
-]
-
-const footerNav = [
-  {
-    text: 'facebook',
-    href: '#'
-  },
-  {
-    text: 'instagram',
-    href: '#'
-  },
-  {
-    text: 'twitter',
-    href: '#'
-  }
-]
+import { social } from '@/utils/social'
 ---
 
 <footer>
   <div class="container">
     <div
-      class="relative flex flex-col-reverse items-center justify-center gap-10 pt-10 font-semibold sm:pt-14 lg:grid lg:grid-cols-3 lg:gap-0"
+      class="relative flex flex-col-reverse items-center justify-center gap-10 py-10 font-semibold sm:py-14 lg:grid lg:grid-cols-3 lg:gap-0"
     >
       <div class="absolute left-0 top-0 h-1 w-full bg-light-gray"></div>
 
-      <Logo />
+      <div class="flex flex-col gap-5">
+        <Logo />
+
+        <p>
+          Dizajn i development:{' '}
+          <a
+            href="https://bluestudio.rs"
+            rel="nofollow"
+            target="_blank"
+            class="underline"
+          >
+            Bluestudio
+          </a>
+        </p>
+      </div>
 
       <ul class="flex list-none flex-col gap-3 text-center">
         {
-          footerSocial.map(({ text, href }) => (
+          social.map(({ name, href }) => (
             <li>
-              <a href={href}>{text}</a>
+              <a href={href}>{name}</a>
             </li>
           ))
         }
@@ -63,17 +48,5 @@ const footerNav = [
         </a>
       </div>
     </div>
-
-    <p class="mt-10 pb-14 text-center lg:mt-14">
-      Dizajn i development:{' '}
-      <a
-        href="https://bluestudio.rs"
-        rel="nofollow"
-        target="_blank"
-        class="underline"
-      >
-        Bluestudio
-      </a>
-    </p>
   </div>
 </footer>

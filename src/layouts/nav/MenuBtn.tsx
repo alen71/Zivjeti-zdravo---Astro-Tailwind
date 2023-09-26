@@ -49,11 +49,11 @@ export default function MenuBtn() {
         <span className="h-[0.125rem] w-2/3 bg-black duration-200 group-hover:translate-x-[150%]"></span>
         <span className="h-[0.125rem] w-full bg-black delay-100 duration-300 group-hover:-translate-x-[150%]"></span>
 
-        <span className="absolute top-0 h-[0.125rem] w-full bg-black  duration-300 translate-x-full group-hover:translate-x-0"></span>
+        <span className="absolute top-0 h-[0.125rem] w-full translate-x-full  bg-black duration-300 group-hover:translate-x-0"></span>
 
-        <span className="absolute top-1/2 h-[0.125rem] w-2/3 bg-black duration-200 -translate-x-full -translate-y-1/2 group-hover:translate-x-0"></span>
+        <span className="absolute top-1/2 h-[0.125rem] w-2/3 -translate-x-full -translate-y-1/2 bg-black duration-200 group-hover:translate-x-0"></span>
 
-        <span className="absolute bottom-0 h-[0.125rem] w-full bg-black  delay-100 duration-300 translate-x-full group-hover:translate-x-0"></span>
+        <span className="absolute bottom-0 h-[0.125rem] w-full translate-x-full  bg-black delay-100 duration-300 group-hover:translate-x-0"></span>
       </motion.div>
 
       <motion.div
@@ -62,8 +62,8 @@ export default function MenuBtn() {
         variants={closeVariants}
         className="absolute left-0 top-0 flex h-5 w-6 flex-col justify-center overflow-hidden "
       >
-        <span className="h-[0.125rem] w-full bg-black translate-y-[0.0625rem] rotate-45" />
-        <span className="h-[0.125rem] w-full bg-black -translate-y-[0.0625rem] -rotate-45" />
+        <span className="h-[0.125rem] w-full translate-y-[0.0625rem] rotate-45 bg-black" />
+        <span className="h-[0.125rem] w-full -translate-y-[0.0625rem] -rotate-45 bg-black" />
       </motion.div>
     </button>
   )
