@@ -1,4 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
 import Logo from '@/components/Logo'
 import MenuBtn from '@/layouts/nav/MenuBtn'
@@ -7,16 +8,20 @@ import NavMenuItems from '@/layouts/nav/MenuItems'
 import useWindowWidth from '@/hooks/useWindowWidth'
 
 const Nav = () => {
+  const [isScroll, setIsScroll] = useState(false)
   const width = useWindowWidth()
 
-  const { scrollYProgress } = useScroll()
-  const height = useTransform(scrollYProgress, [0, 0.05], [158, 80])
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      setIsScroll(window.scrollY > 0)
+    })
+  }, [])
 
   return (
     <>
       <motion.header
-        style={{ willChange: 'height', height: width > 1024 ? height : 80 }}
-        className="left fixed top-0 z-50 w-screen bg-white "
+        style={{ willChange: 'height', height: isScroll ? 80 : 158 }}
+        className="left fixed top-0 z-50 w-screen bg-white duration-300"
       >
         <div className="container relative z-10 h-full bg-white">
           <div className="relative flex h-full items-center justify-between">

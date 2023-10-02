@@ -6,11 +6,11 @@ import { social } from '@/utils/social.astro'
 <footer>
   <div class="container">
     <div
-      class="relative flex flex-col-reverse items-center justify-center gap-10 py-10 font-semibold sm:py-14 lg:grid lg:grid-cols-3 lg:gap-0"
+      class="lg:gap- relative flex flex-col-reverse items-center justify-center gap-10 py-10 font-semibold sm:py-14 lg:flex-row lg:justify-start lg:gap-0"
     >
       <div class="absolute left-0 top-0 h-1 w-full bg-light-gray"></div>
 
-      <div class="flex flex-col gap-5">
+      <div class="flex flex-col gap-5 lg:mr-[17%]">
         <Logo />
 
         <p>
@@ -26,7 +26,9 @@ import { social } from '@/utils/social.astro'
         </p>
       </div>
 
-      <ul class="flex list-none flex-col gap-3 text-center">
+      <ul
+        class="flex list-none flex-col gap-3 text-center lg:mr-[7.5%] lg:border-r-1 lg:pr-[7.5%] lg:text-left"
+      >
         {
           social.map(({ name, href }) => (
             <li>
@@ -36,7 +38,7 @@ import { social } from '@/utils/social.astro'
         }
       </ul>
 
-      <div class="flex list-none flex-col gap-3 text-center">
+      <div class="flex list-none flex-col gap-3 text-center lg:text-left">
         <p>Kontakt:</p>
         <a
           href="mailto:zivjetizdravo7@gmail.com"
