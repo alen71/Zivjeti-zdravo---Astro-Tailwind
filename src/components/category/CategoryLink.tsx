@@ -28,7 +28,7 @@ const CategoryLink = ({ childCategories, slug, name, urlSlug }: Props) => {
         })}
       >
         <a
-          href={'/category/' + slug}
+          href={'/kategrorija/' + slug}
           className="group flex items-center gap-3 text-2xl font-semibold"
         >
           <div className="relative grid h-5 w-5 place-items-center overflow-hidden rounded-full border-1 border-dark-gray">

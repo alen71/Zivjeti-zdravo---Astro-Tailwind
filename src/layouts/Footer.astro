@@ -34,7 +34,10 @@ const categories = await getMainCategories()
           {
             categories.map(({ name, slug }) => (
               <li>
-                <a href={'/' + slug} class="duration-200 hover:text-primary">
+                <a
+                  href={'/kategrorija/' + slug}
+                  class="duration-200 hover:text-primary"
+                >
                   {name}
                 </a>
               </li>

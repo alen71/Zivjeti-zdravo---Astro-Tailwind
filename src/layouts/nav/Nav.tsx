@@ -8,6 +8,24 @@ import NavMenuItems from '@/layouts/nav/MenuItems'
 import useWindowWidth from '@/hooks/useWindowWidth'
 import useGetCategories from '@/hooks/useGetCategories'
 
+import { social } from '@/utils/social.astro'
+
+import InstagramIcon from '@/icons/components/InstagramIcon'
+import YoutubeIcon from '@/icons/components/YoutubeIcon'
+import TiktokIcon from '@/icons/components/TiktokIcon'
+
+const socialIcons = [
+  {
+    icon: InstagramIcon
+  },
+  {
+    icon: YoutubeIcon
+  },
+  {
+    icon: TiktokIcon
+  }
+]
+
 const Nav = () => {
   const [isScroll, setIsScroll] = useState(false)
   const width = useWindowWidth()
@@ -30,22 +48,45 @@ const Nav = () => {
           <div className="relative flex h-full items-center justify-between">
             <Logo />
 
-            <ul className="hidden gap-6 font-light lg:flex ">
-              {categories.map(({ name, parent, slug, id }) => {
-                if (parent !== 0 || id === 1) return
+            <div className="hidden gap-14 lg:flex">
+              <ul className="flex gap-6 font-light">
+                {categories.map(({ name, parent, slug, id }) => {
+                  if (parent !== 0 || id === 1) return
 
-                return (
-                  <li>
+                  return (
+                    <li>
+                      <a
+                        href={'/kategrorija/' + slug}
+                        className="duration-200 hover:text-primary"
+                      >
+                        {name}
+                      </a>
+                    </li>
+                  )
+                })}
+              </ul>
+
+              <div className="flex items-center gap-5">
+                {social.map(({ href, name }, i) => {
+                  const Icon = socialIcons[i].icon
+
+                  return (
                     <a
-                      href={'/' + slug}
+                      href={href}
+                      key={href}
                       className="duration-200 hover:text-primary"
                     >
-                      {name}
+                      {/* <img
+                      src={socialIcons[i].icon.src}
+                      alt={name}
+                      className="text-primary"
+                    /> */}
+                      <Icon />
                     </a>
-                  </li>
-                )
-              })}
-            </ul>
+                  )
+                })}
+              </div>
+            </div>
 
             <div className="lg:hidden">
               <MenuBtn />
