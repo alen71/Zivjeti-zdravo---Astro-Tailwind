@@ -11,12 +11,12 @@ import {
   shadowVariants
 } from '@/utils/variants/menuItemsVariants.astro'
 
-import useGetCategories from '@/hooks/useGetCategories'
+type Props = {
+  categories: ICategory[]
+}
 
-export default function NavMenuItems() {
+export default function NavMenuItems({ categories }: Props) {
   const $isMenuOpen = useStore(isMenuOpen)
-
-  const categories = useGetCategories()
 
   return (
     <motion.div

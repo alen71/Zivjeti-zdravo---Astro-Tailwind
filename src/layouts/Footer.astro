@@ -1,50 +1,72 @@
 ---
 import Logo from '@/components/Logo.tsx'
+import { getMainCategories } from '@/lib/categories'
 import { social } from '@/utils/social.astro'
+
+const categories = await getMainCategories()
 ---
 
 <footer>
   <div class="container">
-    <div
-      class="lg:gap- relative flex flex-col-reverse items-center justify-center gap-10 py-10 font-semibold sm:py-14 lg:flex-row lg:justify-start lg:gap-0"
-    >
-      <div class="absolute left-0 top-0 h-1 w-full bg-light-gray"></div>
+    <div class="h-1 w-full bg-light-gray"></div>
 
-      <div class="flex flex-col gap-5 lg:mr-[17%]">
+    <div
+      class="relative mx-auto grid w-fit justify-items-start gap-10 py-10 font-semibold sm:py-14 lg:mx-0 lg:w-full lg:grid-cols-4 lg:justify-items-center lg:gap-0"
+    >
+      <div class="flex flex-col justify-between gap-5 lg:mr-[17%]">
         <Logo />
 
-        <p>
+        <p class="text-dark-gray">
           Dizajn i development:{' '}
           <a
             href="https://bluestudio.rs"
             rel="nofollow"
             target="_blank"
-            class="underline"
+            class="text-primary hover:underline"
           >
             Bluestudio
           </a>
         </p>
       </div>
 
-      <ul
-        class="flex list-none flex-col gap-3 text-center lg:mr-[7.5%] lg:border-r-1 lg:pr-[7.5%] lg:text-left"
-      >
-        {
-          social.map(({ name, href }) => (
-            <li>
-              <a href={href}>{name}</a>
-            </li>
-          ))
-        }
-      </ul>
+      <div class="flex w-full items-center lg:justify-center lg:border-x-1">
+        <ul class="flex list-none flex-col gap-3 text-left font-light">
+          {
+            categories.map(({ name, slug }) => (
+              <li>
+                <a href={'/' + slug} class="duration-200 hover:text-primary">
+                  {name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
 
-      <div class="flex list-none flex-col gap-3 text-center lg:text-left">
-        <p>Kontakt:</p>
+      <div class="flex w-full items-center lg:justify-center lg:border-r-1">
+        <div class="lg:text-left">
+          <p class="mb-3 text-primary">Social:</p>
+          <ul class="flex list-none flex-col gap-3 font-light lg:text-left">
+            {
+              social.map(({ name, href }) => (
+                <li>
+                  <a href={href} class="duration-200 hover:text-primary">
+                    {name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="flex list-none flex-col gap-3 lg:text-left">
+        <p class="text-primary">Kontakt:</p>
         <a
           href="mailto:zivjetizdravo7@gmail.com"
           rel="nofollow"
           target="_blank"
-          class="hover:underline"
+          class="font-light duration-200 hover:text-primary"
         >
           zivjetizdravo7@gmail.com
         </a>

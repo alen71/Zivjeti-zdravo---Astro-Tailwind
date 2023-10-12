@@ -1,9 +1,13 @@
 ---
+import { Image } from 'astro:assets'
+
 import Card from '@/components/Card.astro'
 import LatestCard from '@/components/CardLatest.astro'
 import MainBtn from '@/components/MainBtn.astro'
 import Layout from '@/layouts/BaseLayout.astro'
 import { getPosts } from '@/lib/posts'
+
+import carrot from '../../public/images/carrot.png'
 
 const latestPosts = await getPosts(
   'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts?per_page=3'
@@ -21,9 +25,7 @@ const posts = await getPosts(
 ---
 
 <Layout title="Živjeti zdravo">
-  <h1 class="text-center uppercase">
-    Prirodni cjeloviti <br /> biljni recepti
-  </h1>
+  <!-- 
 
   <p class="mx-auto mt-8 max-w-4xl text-center">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -32,7 +34,23 @@ const posts = await getPosts(
     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
     cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
     non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
+  </p> -->
+
+  <div
+    class="relative rounded-xl bg-primary bg-[url('../../public/images/fruits.png')] bg-cover bg-center bg-no-repeat p-20"
+  >
+    <h1 class="text-5xl text-white">
+      Prirodni cjeloviti <br /> biljni recepti
+    </h1>
+
+    <Image
+      src={carrot}
+      width={418}
+      alt="carrot"
+      quality={100}
+      class="absolute right-16 top-1/2 -translate-y-1/2"
+    />
+  </div>
 
   <div
     class="mt-20 grid gap-6 sm:grid-cols-[60fr_40fr] sm:grid-rows-2 lg:mt-24 lg:gap-8"

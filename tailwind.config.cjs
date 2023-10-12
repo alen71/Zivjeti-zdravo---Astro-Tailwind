@@ -25,6 +25,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        primary: '#FF6500',
         'dark-gray': '#00000099',
         'light-gray': '#E4E4E4',
         'very-light-gray': '#EFEFEF'
@@ -39,6 +40,5 @@ module.exports = {
         1: '0.0625rem'
       }
     }
-  },
-
+  }
 }
