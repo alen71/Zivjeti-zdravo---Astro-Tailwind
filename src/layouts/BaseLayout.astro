@@ -26,9 +26,14 @@ const { mainClass, title }: Props = Astro.props
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta property="og:image" content="/public/images/preview-img.jpg" />
-    <meta content="website" property="og:type" />
+
     <meta content={BASE_URL} property="og:url" />
+    <meta
+      property="og:image"
+      content="https://zivjetizdravo.com/preview-img.jpg"
+    />
+
+    <meta content="website" property="og:type" />
     <meta content="Živjeti zdravo" property="og:site_name" />
     <title>{title ? title : 'Živjeti zdravo'}</title>
     <ViewTransitions fallback="swap" />
