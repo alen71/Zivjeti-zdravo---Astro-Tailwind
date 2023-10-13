@@ -41,7 +41,7 @@ const { mainClass, title }: Props = Astro.props
   <body>
     <Nav client:load />
     <main
-      class={twMerge('container pb-24 pt-36 md:pt-56', mainClass)}
+      class={twMerge('container pb-24 pt-48 md:pt-56', mainClass)}
       transition:animate="initial"
     >
       <slot />
