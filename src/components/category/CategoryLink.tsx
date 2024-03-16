@@ -4,12 +4,11 @@ import { motion } from 'framer-motion'
 
 import Arrow from '@/icons/dropdown-arrow.svg'
 
-import type { ICategoryList } from '@/pages/category/[slug].astro'
-
 import {
   categoryLinkContainer,
   categoryLinkVariants
 } from '@/utils/variants/categoryLinkVarians.astro'
+import type { ICategoryList } from '@/pages/kategrorija/[slug].astro'
 
 type Props = ICategoryList & {
   urlSlug: string

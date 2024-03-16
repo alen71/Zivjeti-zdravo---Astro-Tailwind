@@ -1,11 +1,11 @@
 ---
 import { slide } from 'astro:transitions'
 
-import type { ICategoryList } from '@/pages/category/[slug].astro'
 import CategoriesFeatured from './CategoriesFeatured.astro'
 
 import { getPosts } from '@/lib/posts'
 import CategoryLink from './CategoryLink'
+import type { ICategoryList } from '@/pages/kategrorija/[slug].astro'
 
 type Props = {
   categories: ICategoryList[]
