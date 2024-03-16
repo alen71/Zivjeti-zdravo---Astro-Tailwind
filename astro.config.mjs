@@ -1,25 +1,22 @@
-import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel/serverless';
-import nodejs from '@astrojs/node';
-import tailwind from '@astrojs/tailwind';
-import react from '@astrojs/react';
-
+import { defineConfig } from 'astro/config'
+import nodejs from '@astrojs/node'
+import tailwind from '@astrojs/tailwind'
+import react from '@astrojs/react'
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react()],
   compressHTML: false,
-  output: 'hybrid',
-  adapter: vercel({
-    edgeMiddleware: true
+  output: 'server',
+  adapter: nodejs({
+    mode: 'standalone'
   }),
-  // adapter: nodejs({
-  //   mode: 'middleware'
-  // }),
   image: {
     domains: ['wp.zivjetizdravo.com'],
-    remotePatterns: [{
-      protocol: 'https'
-    }]
+    remotePatterns: [
+      {
+        protocol: 'https'
+      }
+    ]
   }
-});
+})

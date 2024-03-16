@@ -5,52 +5,30 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 
 import { getCategoryById } from '@/lib/categories'
 import { getFeaturedImage } from '@/lib/media'
-import { getPosts } from '@/lib/posts'
+import { getPostBySlug } from '@/lib/posts'
 
-import type { IMedia } from '@/types/mediaTypes'
 import { Image } from 'astro:assets'
 import { dateFormat } from '@/utils/helper.astro'
 
-export async function getStaticPaths() {
-  const allPosts = await getPosts(
-    'https://wp.zivjetizdravo.com/wp-json/wp/v2/posts'
-  )
+export const prerender = false
 
-  const paths = Promise.all(
-    allPosts.map(async post => {
-      const postCategories = await Promise.all(
-        post.categories.map(async category => {
-          const data = await getCategoryById(category)
+const { slug } = Astro.params
 
-          return data
-        })
-      )
+const post = await getPostBySlug(slug)
 
-      const featuredImage = await getFeaturedImage(post.featured_media)
+const featuredImage = await getFeaturedImage(post.featured_media)
 
-      return {
-        params: {
-          slug: post.slug
-        },
-        props: { post, postCategories, featuredImage }
-      }
-    })
-  )
+const postCategories = await Promise.all(
+  post.categories.map(async category => {
+    const data = await getCategoryById(category)
 
-  return paths
-}
-
-type Props = {
-  post: IPost
-  postCategories: ICategory[]
-  featuredImage: IMedia
-}
-
-const { post, postCategories, featuredImage }: Props = Astro.props
+    return data
+  })
+)
 ---
 
 <BaseLayout title={post.title.rendered}>
-  <div class="relative h-[25rem] overflow-hidden rounded-2xl">
+  <div class="relative h-[60vh] overflow-hidden rounded-2xl">
     <Image
       width={1000}
       height={500}
@@ -63,7 +41,7 @@ const { post, postCategories, featuredImage }: Props = Astro.props
 
   <div class="mx-auto my-10 flex max-w-[47rem] items-center lg:my-16">
     <div class="flex">
-      {postCategories.map(category => <CategoryTag category={category} />)}
+      {postCategories?.map(category => <CategoryTag category={category} />)}
     </div>
 
     <p>{dateFormat(post.date)}</p>

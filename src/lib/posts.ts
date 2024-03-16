@@ -13,7 +13,7 @@ export const getPostBySlug = async (slug: string) => {
   )
   const posts: IPost = await postsRes.json()
 
-  return posts
+  return posts[0]
 }
 
 export const getPosts = async (url: string) => {
